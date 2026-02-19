@@ -56,6 +56,11 @@ const Header = () => {
               onClick={() => setIsLoginOpen(true)}
               className="border border-black px-4 py-1.5 text-sm rounded-lg hover:bg-black hover:text-white transition"
             >
+Invite            </button>
+            <button
+              onClick={() => setIsLoginOpen(true)}
+              className="border border-black px-4 py-1.5 text-sm rounded-lg hover:bg-black hover:text-white transition"
+            >
               Log in
             </button>
 
