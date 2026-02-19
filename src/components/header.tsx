@@ -1,50 +1,90 @@
+import { Search } from "lucide-react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { Menu, X } from "lucide-react";
-import logo from '../assets/LOGO-removebg-preview.png'
-
+import LoginModal from "../pages/login"; 
 const Header = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
 
   return (
-    <header className="flex items-center  justify-between p-4 bg-white border-b sticky top-0 z-10">
-      {/* Hamburger Icon */}
-      <button
-        onClick={() => setMenuOpen(!menuOpen)}
-        className="md:hidden text-gray-800"
-      >
-        {menuOpen ? <X size={28} /> : <Menu size={28} />}
-      </button>
+    <>
+      <header className="w-full bg-white border-b border-gray-200 px-6 py-3">
+        <div className="flex items-center justify-between">
 
-      {/* Full-screen Menu */}
-      {menuOpen && (
-        <div className="fixed inset-0  bg-white flex flex-col items-center justify-center gap-6 text-lg font-semibold z-50">
-          <button
-            onClick={() => setMenuOpen(false)}
-            className="absolute top-4 right-4"
-          >
-            <X size={32} />
-          </button>
-          <Link to="/" className="hover:text-purple-600" onClick={() => setMenuOpen(false)}>Home</Link>
-          <Link to="/about" className="hover:text-purple-600" onClick={() => setMenuOpen(false)}>About Us</Link>
-          <Link to="/winners" className="hover:text-purple-600" onClick={() => setMenuOpen(false)}>Winners List</Link>
-          <Link to="/prize-claim" className="hover:text-purple-600" onClick={() => setMenuOpen(false)}>Prize Claim</Link>
-          <Link to="/contact" className="hover:text-purple-600" onClick={() => setMenuOpen(false)}>Contact Us</Link>
+          {/* LEFT SECTION */}
+          <div className="flex items-center gap-6">
+            {/* Logo */}
+            <div className="cursor-pointer">
+             <div className="css-k008qs" ><span role="img" className="anticon css-b2pqri"><svg xmlns="http://www.w3.org/2000/svg" width="128" height="33" viewBox="0 0 128 33" fill="none" className=""><path fill-rule="evenodd" clip-rule="evenodd" d="M14.11 6.402a25.713 25.713 0 0 1 1.596 6.098H32v6.4H15.773a25.724 25.724 0 0 1-1.687 6.7H0V32h10.378H0V0h10.425l.002.002H0v6.4h14.11Zm1.826 9.568c0 .99-.055 1.968-.163 2.93H0v-6.4h15.706c.152 1.135.23 2.293.23 3.47Z" fill="currentColor"></path><path d="M32 6.402H14.11a25.86 25.86 0 0 0-3.683-6.4H32v6.4ZM32 32H10.378a25.864 25.864 0 0 0 3.708-6.4H32V32Z" fill="currentColor"></path><path d="M114.719 23.529c.787 2.543 1.741 4.436 2.861 5.677 1.121 1.242 2.468 1.863 4.043 1.863 1.151 0 2.044-.349 2.68-1.045.666-.697.999-1.62.999-2.77 0-1.212-.257-2.212-.772-2.999a7.83 7.83 0 0 0-1.953-2.044 26.102 26.102 0 0 0-2.544-1.635 28.334 28.334 0 0 1-2.543-1.68 8.168 8.168 0 0 1-1.954-2.135c-.514-.818-.772-1.832-.772-3.044 0-1.06.243-1.998.727-2.816a5.282 5.282 0 0 1 1.999-1.998c.847-.485 1.816-.727 2.907-.727.696 0 1.287.075 1.771.227.515.121.939.257 1.272.409.363.12.666.181.908.181.545 0 .879-.196 1-.59h.318l.681 6.995h-.409c-.636-2.15-1.408-3.725-2.316-4.724-.909-1.03-1.999-1.544-3.271-1.544-1.029 0-1.862.302-2.498.908-.606.606-.908 1.423-.908 2.453 0 .908.257 1.68.772 2.316.514.606 1.166 1.151 1.953 1.636.817.484 1.665.984 2.543 1.498.909.485 1.757 1.06 2.544 1.727a7.836 7.836 0 0 1 1.953 2.361c.515.94.772 2.105.772 3.498 0 1.938-.545 3.513-1.635 4.724-1.09 1.18-2.528 1.771-4.315 1.771a9.239 9.239 0 0 1-2.135-.227 35.688 35.688 0 0 1-1.635-.363c-.454-.151-.848-.227-1.181-.227-.575 0-.999.197-1.272.59h-.272l-.682-8.267h.364ZM103.486 32.022c-1.665 0-3.149-.5-4.451-1.498-1.272-1-2.271-2.393-2.998-4.18-.697-1.816-1.045-3.906-1.045-6.268 0-2.392.348-4.466 1.045-6.222.696-1.787 1.68-3.18 2.952-4.18 1.302-.999 2.786-1.498 4.452-1.498 1.695 0 3.179.5 4.451 1.499 1.272.999 2.256 2.392 2.953 4.179.726 1.756 1.09 3.83 1.09 6.222 0 2.362-.364 4.452-1.09 6.269-.697 1.786-1.681 3.18-2.953 4.178-1.272 1-2.74 1.5-4.406 1.5Zm-.045-22.892c-1.09 0-2.029.439-2.816 1.317-.788.878-1.393 2.135-1.817 3.77-.394 1.605-.59 3.558-.59 5.86 0 2.27.196 4.239.59 5.904.424 1.635 1.03 2.892 1.817 3.77.817.878 1.756 1.318 2.816 1.318 1.09 0 2.029-.44 2.816-1.318.787-.878 1.393-2.135 1.817-3.77.424-1.665.636-3.634.636-5.905 0-2.301-.212-4.254-.636-5.86-.424-1.634-1.03-2.89-1.817-3.77-.787-.877-1.726-1.316-2.816-1.316ZM77.095 3.952c0-1-.091-1.726-.273-2.18-.182-.485-.53-.864-1.045-1.136V.227L80.047 0v28.843c0 .697.106 1.227.318 1.59.212.363.56.605 1.045.727v.408h-5.633v-.408c.485-.122.818-.349 1-.682.212-.363.318-.908.318-1.635V3.952Zm10.492 27.616v-.408c.485-.122.833-.364 1.045-.727.212-.363.318-.893.318-1.59V16.17c0-2.059-.379-3.603-1.136-4.633-.757-1.06-1.877-1.59-3.361-1.59-.909 0-1.772.228-2.59.682-.786.454-1.468 1.105-2.043 1.953l-.136-.227c.575-1.272 1.408-2.286 2.498-3.043 1.09-.757 2.271-1.136 3.543-1.136 1.998 0 3.528.636 4.587 1.908 1.06 1.241 1.59 2.998 1.59 5.269v13.49c0 .727.091 1.272.273 1.635.212.333.56.56 1.044.682v.408h-5.632ZM65.27 9.161c1.09-.181 2.717-.311 3.353-1.371.666-1.06.914-4.878.914-6.707L70.56.931v8.153h3.18v1.136h-3.18v17.669c0 1.03.167 1.786.5 2.27.333.455.924.788 1.772 1v.409h-6.587v-.409c.485-.121.833-.363 1.045-.727.212-.363.318-.893.318-1.59V12.81c0-2.252-.66-3.239-2.338-3.239v-.409ZM45 1.135h15.898l.363 7.722h-.363c-.424-1.938-.97-3.377-1.635-4.316-.636-.969-1.393-1.604-2.272-1.907-.878-.303-1.862-.455-2.952-.455h-4.315v28.344h4.406c1.15 0 2.165-.106 3.043-.318a5.38 5.38 0 0 0 2.317-1.317c.696-.636 1.302-1.53 1.817-2.68.514-1.181.984-2.695 1.408-4.542h.454l-1 9.902H45v-.41c.575-.12.969-.378 1.181-.771.212-.394.318-.985.318-1.772V4.087c0-.787-.106-1.362-.318-1.726-.212-.393-.606-.65-1.181-.772v-.454Zm3.316 14.535v-1h3.77c1.575 0 2.786-.287 3.634-.863.848-.605 1.483-1.68 1.907-3.224h.41v9.493h-.41c-.333-1.181-.772-2.09-1.317-2.726-.515-.635-1.12-1.075-1.817-1.317-.696-.242-1.499-.363-2.407-.363h-3.77Z" fill="currentColor"></path></svg></span></div>
+            </div>
+
+            {/* Search */}
+            <div className="relative w-64 hidden md:block">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4" />
+              <input
+                type="search"
+                placeholder="Search"
+                className="w-full pl-9 pr-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
+              />
+            </div>
+          </div>
+
+          {/* CENTER NAV */}
+          <div className="hidden md:flex items-center gap-6 text-sm font-medium">
+            <button onClick={() => setIsLoginOpen(true)} className="hover:text-black">
+              Home
+            </button>
+            <button onClick={() => setIsLoginOpen(true)} className="hover:text-black">
+              Listings
+            </button>
+            <button onClick={() => setIsLoginOpen(true)} className="hover:text-black">
+              Broker
+            </button>
+            <button
+              onClick={() => setIsLoginOpen(true)}
+              className="relative hover:text-black"
+            >
+              Exclusive Access
+              <span className="absolute -top-2 -right-4 bg-black text-white text-xs px-1.5 py-0.5 rounded-full">
+                2
+              </span>
+            </button>
+          </div>
+
+          {/* RIGHT SECTION */}
+          <div className="flex items-center gap-4">
+            {/* Login Button */}
+            <button
+              onClick={() => setIsLoginOpen(true)}
+              className="border border-black px-4 py-1.5 text-sm rounded-lg hover:bg-black hover:text-white transition"
+            >
+              Log in
+            </button>
+
+            {/* Avatar */}
+            <button
+              onClick={() => setIsLoginOpen(true)}
+              className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 transition"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-5 h-5 text-gray-600"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4Zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4Z" />
+              </svg>
+            </button>
+          </div>
         </div>
-      )}
+      </header>
+      
+      
 
-      {/* Desktop Navigation */}
-      <nav className="hidden md:flex gap-6 text-gray-800 font-medium">
-        <Link to="/" className="hover:text-purple-600">Home</Link>
-        <Link to="/about" className="hover:text-purple-600">About Us</Link>
-        <Link to="/winners" className="hover:text-purple-600">Winners List</Link>
-        <Link to="/prize-claim" className="hover:text-purple-600">Prize Claim</Link>
-        <Link to="/contact" className="hover:text-purple-600">Contact Us</Link>
-      </nav>
-
-      {/* Logo on the right */}
-      <div className="text-xl font-bold text-purple-700"><img src={logo} width={100} /></div>
-    </header>
+      {/* ✅ LOGIN MODAL */}
+      <LoginModal
+        isOpen={isLoginOpen}
+        onClose={() => setIsLoginOpen(false)}
+      />
+    </>
   );
 };
 

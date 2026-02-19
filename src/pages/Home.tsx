@@ -1,14 +1,25 @@
-import HeroSection from "../components/heroSection"
-import Testimonials from "../components/testimonial"
-
+import FeedPage from "../components/feedcard";
+import FeedPage2 from "../components/feedcard2";
+import Header from "../components/header";
+import { ReputationCarousel } from "../components/profile";
+import SlashCard from "../components/slashcard";
+import { TopVouchesMarquee } from "../components/topvou";
 
 const Home = () => {
   return (
-  <>
-  <HeroSection/>
-  <Testimonials/>
-  </>
-  )
-}
+    <div className=" bg-gray-50">
+      {/* Header */}
+      <Header />
+      <TopVouchesMarquee/>
+      <ReputationCarousel/>
+   <FeedPage/>
+   <SlashCard/>
+   <FeedPage2/>
 
-export default Home
+
+
+    </div>
+  );
+};
+
+export default Home;
