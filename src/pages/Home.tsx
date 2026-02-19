@@ -10,14 +10,11 @@ const Home = () => {
     <div className=" bg-gray-50">
       {/* Header */}
       <Header />
-      <TopVouchesMarquee/>
-      <ReputationCarousel/>
-   <FeedPage/>
-   <SlashCard/>
-   <FeedPage2/>
-
-
-
+      <TopVouchesMarquee />
+      <ReputationCarousel />
+      <FeedPage />
+      <SlashCard />
+      <FeedPage2 />
     </div>
   );
 };
